@@ -22,19 +22,25 @@ const noteTarget = {
   }
 };
 
-@DragSource(ItemTypes.NOTE, noteSource, (connect) => ({
-  connectDragSource: connect.dragSource()
-}))
+@DragSource(ItemTypes.NOTE, noteSource, (connect, monitor) => {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+})
 @DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
 export default class Note extends React.Component {
   render() {
-    const {connectDragSource, connectDropTarget,
+    const {connectDragSource, connectDropTarget, isDragging,
       onMove, id, ...props} = this.props;
+    const opacity = isDragging ? 0 : 1;
+
+    console.log('is dragging', isDragging);
 
     return connectDragSource(connectDropTarget(
-      <li {...props}>{props.children}</li>
+      <li style={{opacity}} {...props}>{props.children}</li>
     ));
   }
 }
