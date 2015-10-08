@@ -181,7 +181,7 @@ to get React installed. This will save React to the `dependencies` section of *p
 
 *react-dom* is needed as React can be used to target multiple systems (DOM, mobile, terminal, i.e.,). Given we're dealing with the browser, *react-dom* is the correct choice here.
 
-Now that we got that out of the way, we can start to develop our Kanban application. First we should define the `App`. This will be the core of our application. It represents the high level view of our app and works as an entry point. Later on it will orchestrate the entire app.
+Now that we got that out of the way, we can start to develop our Kanban application. First we should define the `App`. This will be the core of our application. It represents the high level view of our app and works as an entry point. Later on it will orchestrate the entire app. We can get started by using React's function based component definition syntax:
 
 **app/components/App.jsx**
 
@@ -189,14 +189,10 @@ Now that we got that out of the way, we can start to develop our Kanban applicat
 import React from 'react';
 import Note from './Note.jsx';
 
-export default class App extends React.Component {
-  render() {
-    return <Note />;
-  }
-}
+export default () => {
+  return <Note />;
+};
 ```
-
-T> You can import portions from `react` using syntax `import React, { Component } from 'react';`. Then you can do `class App extends Component`. You may find this alternative a little neater.
 
 T> It may be worth your while to install [React Developer Tools](https://github.com/facebook/react-devtools) extension to your browser. Currently Chrome and Firefox are supported. This will make it easier to understand what's going on while developing.
 
@@ -211,11 +207,9 @@ We also need to define the `Note` component. In this case, we will just want to 
 ```javascript
 import React from 'react';
 
-export default class Note extends React.Component {
-  render() {
-    return <div>Learn Webpack</div>;
-  }
-}
+export default () => {
+  return <div>Learn Webpack</div>;
+};
 ```
 
 T> Note that we're using *jsx* extension here. It helps us to tell modules using JSX syntax apart from regular ones. It is not absolutely necessary, but it is a good convention to have.
